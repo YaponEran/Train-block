@@ -22,7 +22,7 @@ class Train
   end
 
   def each_vagons(&block)
-    @num_of_vagons.each {|vagon| block.call(vagon) if block_given?}
+    @num_of_vagons.each {|vagon| yield(vagon) if block_given?}
   end
 
   def move_train
