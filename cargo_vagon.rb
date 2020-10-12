@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# A cargo vagon which will be aded train
 class CargoVagon < Vagon
-  attr_reader :type :cargo_volume
+  attr_reader :type, :cargo_volume
   def initialize(cargo_volume)
     @type = :cargo
     @cargo_volume = cargo_volume
@@ -23,6 +26,6 @@ class CargoVagon < Vagon
   end
 
   protected
+
   attr_accessor :volume
-  
 end

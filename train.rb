@@ -1,18 +1,21 @@
+# frozen_string_literal: true
+
+# main train
 class Train
   include InstanceCounter
   include Factory
 
   attr_reader :number, :type, :station, :num_of_vagons, :route, :speed
-  @@trains = {}
+  @trains = {}
   NUMBER_EXAMPLE = /^[a-zа-я\d]{3}-?[a-zа-я\d]{2}/i.freeze
 
   def self.find(num)
-    @@trains[num]
+    @trains[num]
   end
 
-  def initialize(number)
-    @number = number
-    @type = type
+  def initialize(options = {})
+    @number = options[:number] || 'Unknown'
+    @type = options[:type] || 'Unknown'
     @num_of_vagons = []
     @speed = 0
     @@trains[@number] = self
@@ -21,8 +24,8 @@ class Train
     validate!
   end
 
-  def each_vagons(&block)
-    @num_of_vagons.each {|vagon| yield(vagon) if block_given?}
+  def each_vagons
+    @num_of_vagons.each { |vagon| yield(vagon) if block_given? }
   end
 
   def move_train
@@ -34,11 +37,11 @@ class Train
   end
 
   def add_vagon(vagon)
-    self.num_of_vagons.push(vagon) if vagon.type == @type && @speed == 0
+    num_of_vagons.push(vagon) if vagon.type == @type && @speed.zero?
   end
 
-  def remove_vagon(vagon)
-    self.num_of_vagons.pop if @speed == 0
+  def remove_vagon(_vagon)
+    num_of_vagons.pop if @speed.zero?
   end
 
   def add_route(route)
@@ -50,7 +53,7 @@ class Train
   def move_station
     if station != route.end_station
       station.send_train(self)
-      self.station = self.next_station
+      self.station = next_station
       station.add_train(self)
     end
   end
@@ -58,7 +61,7 @@ class Train
   def comeback_station
     if station != route.start_station
       station.sent_train(self)
-      self.station = self.previous_station
+      self.station = previous_station
       station.add_train(self)
     end
   end
@@ -76,15 +79,15 @@ class Train
   end
 
   protected
+
   def valid?
     validate!
     true
-  rescue
+  rescue StandardError
     false
   end
 
   def validate!
-    raise "Invalid number" if number !~ NUMBER_EXAMPLE
+    raise 'Invalid number' if number !~ NUMBER_EXAMPLE
   end
-
 end

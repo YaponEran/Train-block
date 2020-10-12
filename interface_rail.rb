@@ -191,8 +191,5 @@ class Rails
 
   def route_list
     @routes.each {|route, index| puts "#{index} : #{route}"}
-  end
-  
-
-
+  end 
 end

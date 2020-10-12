@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# a people vagon only
 class PassengerVagon < Vagon
   attr_reader :type, :sit_place
   def initialize(sit_place)
@@ -8,6 +11,7 @@ class PassengerVagon < Vagon
 
   def take_sit_place(msg, val)
     raise msg if occupied_place?(val)
+
     @occupied += val
   end
 
@@ -20,5 +24,6 @@ class PassengerVagon < Vagon
   end
 
   protected
+
   attr_accessor :occupied
 end

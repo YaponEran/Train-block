@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# A route class whict controll a route count
 class Route
   include InstanceCounter
   attr_reader :start_station, :end_station, :stations
@@ -16,5 +19,4 @@ class Route
   def delete_station(station)
     @stations.delete(station)
   end
-
-end 
+end
