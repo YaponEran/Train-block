@@ -81,7 +81,7 @@ class Rails
   end
 
   def add_station_to_route
-    #route list chhose
+    #route list choose
     puts "Choose route number: "
     route_num = gets.chomp.to_i
     route = @routes[route_num - 1]
@@ -144,6 +144,7 @@ class Rails
   end
 
   def remove_vagon
+    #remove vagons
     puts "Choose a train: "
     train_index = gets.chomp.to_i
     train = @trains[train_index - 1]
@@ -169,7 +170,7 @@ class Rails
     puts "Enter vagon number"
     number = gets.choice.to_i
     index = gets.chomp.to_i
-    if @trains[index].class.to_s.equal?('PassangerWagon')
+    if (@trains[index].class.to_s.equal?('PassangerWagon'))
       sit_number = gets.chomp.to_i
       @trains[index].take_sit_place(sit_number)
     else
@@ -192,4 +193,5 @@ class Rails
   def route_list
     @routes.each {|route, index| puts "#{index} : #{route}"}
   end 
+    
 end

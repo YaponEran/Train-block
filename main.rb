@@ -14,5 +14,3 @@ require_relative 'interFace_rail'
 
 rails = Rails.new
 rails.start
-
-# rails.show
