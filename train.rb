@@ -4,10 +4,14 @@
 class Train
   include InstanceCounter
   include Factory
-
+  
   attr_reader :number, :type, :station, :num_of_vagons, :route, :speed
+  strong_attr_acessor :number, String
   @trains = {}
   NUMBER_EXAMPLE = /^[a-zа-я\d]{3}-?[a-zа-я\d]{2}/i.freeze
+  
+  validate :number, format: NUMBER_EXAMPLE
+  validate :number, :presence
 
   def self.find(num)
     @trains[num]

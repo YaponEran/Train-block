@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'factory'
+require_relative 'accessors'
 require_relative 'instance_counter'
 require_relative 'vagon'
 require_relative 'train'

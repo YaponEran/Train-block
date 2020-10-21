@@ -7,6 +7,8 @@ class Station
   @stations = []
 
   NAME_EXAMPLE = /^[А-ЯЁ][а-яё]{2,15}$/x.freeze
+  validate :name, :presence
+  validate :name, :type, type: String
 
   def initialize(name)
     @name = name
